@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --color-hb-neutral-900: #2b2620;
+  --color-hb-neutral-800: #3e3428;
+  --color-hb-neutral-700: #5a4c3c;
+  --color-hb-neutral-600: #7a6a57;
+  --color-hb-neutral-400: #e4ded5;
+}
