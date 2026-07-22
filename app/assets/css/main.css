@@ -6,4 +6,13 @@
   --color-hb-neutral-700: #5a4c3c;
   --color-hb-neutral-600: #7a6a57;
   --color-hb-neutral-400: #e4ded5;
+  --color-hb-neutral-200: #f2eeea;
+  --color-hb-neutral-100: #fbf6ef;
+  --color-hb-neutral-50: #fdfbf7;
+  --color-hb-neutral-0: #ffffff;
+
+  --color-hb-sun-500: #edb63a;
+  --color-hb-sun-300: #f5d98a;
+  --color-hb-sun-200: #ffde7a;
+  --color-hb-sun-50: #fff4dc;
 }
