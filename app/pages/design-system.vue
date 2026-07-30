@@ -242,7 +242,7 @@ const spacingTokens = [
             <div class="border-t border-hb-neutral-400 p-5 sm:flex sm:items-center sm:justify-between">
               <div>
                 <p class="text-xs font-semibold">Interaction</p>
-                <p class="mt-1 text-xs text-hb-neutral-600">Hover transitions from neutral-900 to neutral-800 in 200ms.</p>
+                <p class="mt-1 text-xs text-hb-neutral-600">Hover transitions to neutral-800. Keyboard focus uses neutral-100 and terracotta-600 rings.</p>
               </div>
               <code class="mt-4 block rounded-lg bg-hb-neutral-100 px-3 py-2 font-mono text-[11px] text-hb-neutral-700 sm:mt-0">&lt;BaseButton&gt;Confirm booking&lt;/BaseButton&gt;</code>
             </div>
