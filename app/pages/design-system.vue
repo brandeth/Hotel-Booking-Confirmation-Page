@@ -234,6 +234,10 @@ const spacingTokens = [
                   <p class="mt-3 text-[11px] font-medium text-hb-neutral-600">Default</p>
                 </div>
                 <div class="text-center">
+                  <BaseButton variant="secondary">Add to calendar</BaseButton>
+                  <p class="mt-3 text-[11px] font-medium text-hb-neutral-600">Secondary</p>
+                </div>
+                <div class="text-center">
                   <BaseButton disabled>Confirm booking</BaseButton>
                   <p class="mt-3 text-[11px] font-medium text-hb-neutral-600">Disabled</p>
                 </div>
