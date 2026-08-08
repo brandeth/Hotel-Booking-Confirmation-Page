@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<{
 
 const variantClasses = computed(() => ({
   primary: 'bg-hb-neutral-900 text-hb-neutral-0 hover:bg-hb-neutral-800 disabled:bg-hb-neutral-400 disabled:text-hb-neutral-600',
-  secondary: 'border border-hb-neutral-400 bg-hb-neutral-400 text-hb-neutral-900 hover:border-hb-neutral-600 hover:bg-hb-neutral-200 disabled:border-hb-neutral-400 disabled:bg-hb-neutral-400 disabled:text-hb-neutral-600',
+  secondary: 'border border-hb-neutral-400 bg-hb-neutral-0 text-hb-neutral-900 hover:border-hb-neutral-400 hover:bg-hb-neutral-200 disabled:border-hb-neutral-400 disabled:bg-hb-neutral-400 disabled:text-hb-neutral-600',
 }[props.variant]))
 </script>
 
