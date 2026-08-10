@@ -94,7 +94,7 @@ const spacingTokens = [
             <p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-hb-neutral-600">Components</p>
             <ul class="space-y-1 text-sm">
               <li><a class="nav-link" href="#button">Button</a></li>
-              <li><span class="block px-3 py-2 text-hb-neutral-600/60">More soon</span></li>
+              <li><a class="nav-link" href="#menu-item">Menu item</a></li>
             </ul>
           </div>
         </nav>
@@ -267,6 +267,49 @@ const spacingTokens = [
               <span class="guideline-number">03</span>
               <h3>Respect the state</h3>
               <p>Disable only when the next action is genuinely unavailable.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="menu-item" class="section-block border-t border-hb-neutral-400/70">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">02 · Components</p>
+              <h2 class="section-title">Menu item</h2>
+            </div>
+            <p class="section-description">A compact navigation action that pairs a clear label with an optional icon and item count.</p>
+          </div>
+
+          <div class="mt-10 overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-0">
+            <div class="grid min-h-72 place-items-center bg-hb-neutral-100 p-8">
+              <div class="w-full max-w-72">
+                <MenuItem :count="1">Your stay</MenuItem>
+              </div>
+            </div>
+            <div class="border-t border-hb-neutral-400 p-5 sm:flex sm:items-center sm:justify-between">
+              <div>
+                <p class="text-xs font-semibold">Interaction</p>
+                <p class="mt-1 text-xs text-hb-neutral-600">Transparent by default, with a neutral surface on hover and a terracotta keyboard-focus ring.</p>
+              </div>
+              <code class="mt-4 block rounded-lg bg-hb-neutral-100 px-3 py-2 font-mono text-[11px] text-hb-neutral-700 sm:mt-0">&lt;MenuItem :count=&quot;1&quot;&gt;Your stay&lt;/MenuItem&gt;</code>
+            </div>
+          </div>
+
+          <div class="mt-8 grid gap-5 sm:grid-cols-3">
+            <article class="guideline-card">
+              <span class="guideline-number">01</span>
+              <h3>Keep labels brief</h3>
+              <p>Use a short noun or phrase that makes the destination easy to scan.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">02</span>
+              <h3>Use counts meaningfully</h3>
+              <p>Show the badge only when the number helps someone understand available content.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">03</span>
+              <h3>Preserve the rhythm</h3>
+              <p>Keep the component at 40px high with consistent spacing between grouped items.</p>
             </article>
           </div>
         </section>
