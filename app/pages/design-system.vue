@@ -243,12 +243,12 @@ const spacingTokens = [
                 </div>
               </div>
             </div>
-            <div class="border-t border-hb-neutral-400 p-5 sm:flex sm:items-center sm:justify-between">
+            <div class="border-t border-hb-neutral-400 p-5">
               <div>
                 <p class="text-xs font-semibold">Interaction</p>
                 <p class="mt-1 text-xs text-hb-neutral-600">Hover transitions to neutral-800. Keyboard focus uses neutral-100 and terracotta-600 rings.</p>
               </div>
-              <code class="mt-4 block rounded-lg bg-hb-neutral-100 px-3 py-2 font-mono text-[11px] text-hb-neutral-700 sm:mt-0">&lt;BaseButton&gt;Confirm booking&lt;/BaseButton&gt;</code>
+              <pre class="mt-4 overflow-x-auto rounded-lg bg-hb-neutral-100 px-3 py-2"><code class="whitespace-nowrap font-mono text-[11px] text-hb-neutral-700">&lt;BaseButton&gt;Confirm booking&lt;/BaseButton&gt;</code></pre>
             </div>
           </div>
 
@@ -282,16 +282,34 @@ const spacingTokens = [
 
           <div class="mt-10 overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-0">
             <div class="grid min-h-72 place-items-center bg-hb-neutral-100 p-8">
-              <div class="w-full max-w-72">
-                <MenuItem :count="1">Your stay</MenuItem>
+              <div class="w-full max-w-sm rounded-xl border border-hb-neutral-400 bg-hb-neutral-100 p-4 sm:p-5">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-hb-neutral-600">Menu item states</p>
+                <div class="mt-4 space-y-4">
+                  <div>
+                    <p class="mb-1.5 text-[10px] font-medium text-hb-neutral-600">Default</p>
+                    <MenuItem :count="1">Your stay</MenuItem>
+                  </div>
+                  <div>
+                    <p class="mb-1.5 text-[10px] font-medium text-hb-neutral-600">Hover</p>
+                    <MenuItem class="menu-item-demo" data-demo-state="hover" :count="1">Your stay</MenuItem>
+                  </div>
+                  <div>
+                    <p class="mb-1.5 text-[10px] font-medium text-hb-neutral-600">Active</p>
+                    <MenuItem class="menu-item-demo" data-demo-state="active" :count="1">Your stay</MenuItem>
+                  </div>
+                  <div>
+                    <p class="mb-1.5 text-[10px] font-medium text-hb-neutral-600">Keyboard focus</p>
+                    <MenuItem class="menu-item-demo" data-demo-state="focus" :count="1">Your stay</MenuItem>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="border-t border-hb-neutral-400 p-5 sm:flex sm:items-center sm:justify-between">
+            <div class="border-t border-hb-neutral-400 p-5">
               <div>
                 <p class="text-xs font-semibold">Interaction</p>
-                <p class="mt-1 text-xs text-hb-neutral-600">Transparent by default, with a neutral surface on hover and a terracotta keyboard-focus ring.</p>
+                <p class="mt-1 text-xs text-hb-neutral-600">Transparent by default, with neutral surfaces for hover and active states, plus a terracotta keyboard-focus ring.</p>
               </div>
-              <code class="mt-4 block rounded-lg bg-hb-neutral-100 px-3 py-2 font-mono text-[11px] text-hb-neutral-700 sm:mt-0">&lt;MenuItem :count=&quot;1&quot;&gt;Your stay&lt;/MenuItem&gt;</code>
+              <pre class="mt-4 overflow-x-auto rounded-lg bg-hb-neutral-100 px-3 py-2"><code class="whitespace-nowrap font-mono text-[11px] text-hb-neutral-700">&lt;MenuItem :count=&quot;1&quot;&gt;Your stay&lt;/MenuItem&gt;</code></pre>
             </div>
           </div>
 
@@ -324,3 +342,21 @@ const spacingTokens = [
     </div>
   </div>
 </template>
+
+<style scoped>
+.menu-item-demo[data-demo-state="hover"] {
+  background: var(--color-hb-neutral-0);
+}
+
+.menu-item-demo[data-demo-state="active"] {
+  background: var(--color-hb-neutral-200);
+  color: var(--color-hb-neutral-900);
+}
+
+.menu-item-demo[data-demo-state="focus"] {
+  background: var(--color-hb-neutral-0);
+  box-shadow:
+    0 0 0 2px var(--color-hb-neutral-100),
+    0 0 0 4px var(--color-hb-terracotta-600);
+}
+</style>
