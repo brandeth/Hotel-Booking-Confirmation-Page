@@ -54,10 +54,17 @@ const spacingTokens = [
   { name: '2', value: '8px', width: '8px' },
   { name: '3', value: '12px', width: '12px' },
   { name: '4', value: '16px', width: '16px' },
+  { name: '5', value: '20px', width: '20px' },
   { name: '6', value: '24px', width: '24px' },
   { name: '8', value: '32px', width: '32px' },
   { name: '12', value: '48px', width: '48px' },
   { name: '16', value: '64px', width: '64px' },
+]
+
+const receiptItems = [
+  { label: 'Room · La Garrigue × 4 nights', amount: 620 },
+  { label: 'Breakfast × 2 guests', amount: 96 },
+  { label: 'Tourist tax', amount: 14.4, muted: true },
 ]
 </script>
 
@@ -94,6 +101,7 @@ const spacingTokens = [
             <p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-hb-neutral-600">Components</p>
             <ul class="space-y-1 text-sm">
               <li><a class="nav-link" href="#button">Button</a></li>
+              <li><a class="nav-link" href="#booking-receipt">Booking receipt</a></li>
               <li><a class="nav-link" href="#menu-item">Menu item</a></li>
             </ul>
           </div>
@@ -271,10 +279,59 @@ const spacingTokens = [
           </div>
         </section>
 
-        <section id="menu-item" class="section-block border-t border-hb-neutral-400/70">
+        <section id="booking-receipt" class="section-block border-t border-hb-neutral-400/70">
           <div class="section-heading">
             <div>
               <p class="eyebrow">02 · Components</p>
+              <h2 class="section-title">Booking receipt</h2>
+            </div>
+            <p class="section-description">A compact confirmation summary that makes stay dates, charges, and payment details easy to scan.</p>
+          </div>
+
+          <div class="mt-10 overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-0">
+            <div class="grid min-h-144 place-items-center overflow-hidden bg-hb-neutral-100 px-4 py-12 sm:px-8">
+              <BookingReceipt
+                receipt-number="MS-2026"
+                confirmation-code="0421-AH"
+                :check-in="{ iso: '2026-04-25', time: '15:00' }"
+                :check-out="{ iso: '2026-04-29', time: '11:00' }"
+                :items="receiptItems"
+                :total="730.4"
+                currency="EUR"
+                payment-provider="Wise"
+                payment-currency="GBP"
+              />
+            </div>
+            <div class="border-t border-hb-neutral-400 p-5">
+              <p class="text-xs font-semibold">Usage</p>
+              <p class="mt-1 text-xs leading-5 text-hb-neutral-600">Provide ISO dates and numeric amounts; the component formats dates and currency according to its locale and currency props.</p>
+              <pre class="mt-4 overflow-x-auto rounded-lg bg-hb-neutral-100 px-3 py-2"><code class="whitespace-nowrap font-mono text-[11px] text-hb-neutral-700">&lt;BookingReceipt :items=&quot;items&quot; :total=&quot;730.4&quot; currency=&quot;EUR&quot; /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="mt-8 grid gap-5 sm:grid-cols-3">
+            <article class="guideline-card">
+              <span class="guideline-number">01</span>
+              <h3>Use confirmed values</h3>
+              <p>Show final stay dates and settled charges rather than estimates.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">02</span>
+              <h3>Keep labels concise</h3>
+              <p>Preserve a clean edge between descriptions and right-aligned amounts.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">03</span>
+              <h3>Localize the details</h3>
+              <p>Pass the appropriate locale and currency for each booking.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="menu-item" class="section-block border-t border-hb-neutral-400/70">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">03 · Components</p>
               <h2 class="section-title">Menu item</h2>
             </div>
             <p class="section-description">A compact navigation action that pairs a clear label with an optional icon and item count.</p>
