@@ -49,6 +49,17 @@ const accentColors = [
   ] },
 ]
 
+const textPresets = [
+  { name: 'text-preset-1', className: 'text-preset-1', family: 'Fraunces', style: 'Regular', size: '40px', leading: '120%', tracking: '-0.5px' },
+  { name: 'text-preset-1-italic', className: 'text-preset-1-italic', family: 'Fraunces', style: 'Italic', size: '40px', leading: '120%', tracking: '-0.5px' },
+  { name: 'text-preset-4', className: 'text-preset-4', family: 'Fraunces', style: 'Regular', size: '20px', leading: '140%', tracking: '-0.1px' },
+  { name: 'text-preset-4-italic', className: 'text-preset-4-italic', family: 'Fraunces', style: 'Italic', size: '20px', leading: '140%', tracking: '-0.1px' },
+  { name: 'text-preset-5', className: 'text-preset-5', family: 'Fraunces', style: 'Regular', size: '14px', leading: '140%', tracking: '0px' },
+  { name: 'text-preset-5-medium', className: 'text-preset-5-medium', family: 'DM Sans', style: 'Medium', size: '14px', leading: '120%', tracking: '0px' },
+  { name: 'text-preset-5-semibold', className: 'text-preset-5-semibold', family: 'DM Sans', style: 'SemiBold', size: '14px', leading: '120%', tracking: '0.3px' },
+  { name: 'text-preset-10', className: 'text-preset-10', family: 'DM Mono', style: 'Regular', size: '10px', leading: '140%', tracking: '1px' },
+]
+
 const spacingTokens = [
   { name: '1', value: '4px', width: '4px' },
   { name: '2', value: '8px', width: '8px' },
@@ -103,6 +114,7 @@ const receiptItems = [
               <li><a class="nav-link" href="#button">Button</a></li>
               <li><a class="nav-link" href="#booking-receipt">Booking receipt</a></li>
               <li><a class="nav-link" href="#menu-item">Menu item</a></li>
+              <li><a class="nav-link" href="#welcome-card">Welcome card</a></li>
             </ul>
           </div>
         </nav>
@@ -176,29 +188,17 @@ const receiptItems = [
               <p class="eyebrow">02 · Foundations</p>
               <h2 class="section-title">Typography</h2>
             </div>
-            <p class="section-description">A direct, humanist type system that keeps booking details effortless to scan at every size.</p>
+            <p class="section-description">Named text presets from the style guide. Use the class, not one-off size and tracking values.</p>
           </div>
 
           <div class="mt-10 overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-0">
-            <div class="type-row">
-              <div class="type-meta"><span>Display</span><span>64 / 62</span></div>
-              <p class="text-5xl font-semibold leading-none tracking-[-0.05em] sm:text-6xl">Your stay, beautifully simple.</p>
-            </div>
-            <div class="type-row">
-              <div class="type-meta"><span>Heading 1</span><span>40 / 44</span></div>
-              <p class="text-4xl font-semibold leading-tight tracking-[-0.035em]">Booking confirmed</p>
-            </div>
-            <div class="type-row">
-              <div class="type-meta"><span>Heading 2</span><span>28 / 34</span></div>
-              <p class="text-3xl font-semibold leading-tight tracking-[-0.025em]">Your reservation details</p>
-            </div>
-            <div class="type-row">
-              <div class="type-meta"><span>Body</span><span>16 / 26</span></div>
-              <p class="max-w-2xl text-base leading-relaxed text-hb-neutral-700">We’ve saved your room and sent the details to your inbox. Everything you need for a smooth arrival is right here.</p>
-            </div>
-            <div class="type-row">
-              <div class="type-meta"><span>Label</span><span>12 / 16</span></div>
-              <p class="text-xs font-semibold uppercase tracking-[0.16em] text-hb-neutral-600">Check-in · Friday, 18 September</p>
+            <div v-for="preset in textPresets" :key="preset.name" class="type-row">
+              <div class="type-meta">
+                <span>{{ preset.name }}</span>
+                <span>{{ preset.family }} · {{ preset.style }}</span>
+                <span>{{ preset.size }} / {{ preset.leading }} / {{ preset.tracking }}</span>
+              </div>
+              <p :class="preset.className">The quick brown fox jumps over the lazy dog.</p>
             </div>
           </div>
         </section>
@@ -385,6 +385,49 @@ const receiptItems = [
               <span class="guideline-number">03</span>
               <h3>Preserve the rhythm</h3>
               <p>Keep the component at 40px high with consistent spacing between grouped items.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="welcome-card" class="section-block border-t border-hb-neutral-400/70">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">04 · Components</p>
+              <h2 class="section-title">Welcome card</h2>
+            </div>
+            <p class="section-description">A host note for the confirmation page. Warm, personal, and sized to sit beside the booking receipt.</p>
+          </div>
+
+          <div class="mt-10 overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-0">
+            <div class="grid min-h-144 place-items-center bg-hb-neutral-900 px-4 py-16 sm:px-8">
+              <WelcomeCard
+                host-name="Margaux."
+                message="We're so glad you're coming. The shutters will be open, the lemonade cold, and the cat – Poivre – pretending not to notice you."
+                room-name="La Garrigue"
+              />
+            </div>
+            <div class="border-t border-hb-neutral-400 p-5">
+              <p class="text-xs font-semibold">Usage</p>
+              <p class="mt-1 text-xs leading-5 text-hb-neutral-600">Pass the host name, welcome note, and room name from the booking. Labels default to the confirmation copy.</p>
+              <pre class="mt-4 overflow-x-auto rounded-lg bg-hb-neutral-100 px-3 py-2"><code class="whitespace-nowrap font-mono text-[11px] text-hb-neutral-700">&lt;WelcomeCard host-name=&quot;Margaux.&quot; room-name=&quot;La Garrigue&quot; message=&quot;We're so glad you're coming.&quot; /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="mt-8 grid gap-5 sm:grid-cols-3">
+            <article class="guideline-card">
+              <span class="guideline-number">01</span>
+              <h3>Use the real host voice</h3>
+              <p>Show the confirmed host name and a short note written for this stay, not placeholder copy.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">02</span>
+              <h3>Keep the note brief</h3>
+              <p>The card is a fixed 420px. A few sentences is enough; longer messages will crowd the room label.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">03</span>
+              <h3>Pair with the receipt</h3>
+              <p>Match the 400×420 footprint so the welcome card and booking receipt can sit side by side.</p>
             </article>
           </div>
         </section>
