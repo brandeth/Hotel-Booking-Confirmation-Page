@@ -65,10 +65,17 @@ const spacingTokens = [
   { name: '2', value: '8px', width: '8px' },
   { name: '3', value: '12px', width: '12px' },
   { name: '4', value: '16px', width: '16px' },
+  { name: '5', value: '20px', width: '20px' },
   { name: '6', value: '24px', width: '24px' },
   { name: '8', value: '32px', width: '32px' },
   { name: '12', value: '48px', width: '48px' },
   { name: '16', value: '64px', width: '64px' },
+]
+
+const receiptItems = [
+  { label: 'Room · La Garrigue × 4 nights', amount: 620 },
+  { label: 'Breakfast × 2 guests', amount: 96 },
+  { label: 'Tourist tax', amount: 14.4, muted: true },
 ]
 </script>
 
@@ -105,7 +112,8 @@ const spacingTokens = [
             <p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-hb-neutral-600">Components</p>
             <ul class="space-y-1 text-sm">
               <li><a class="nav-link" href="#button">Button</a></li>
-              <li><span class="block px-3 py-2 text-hb-neutral-600/60">More soon</span></li>
+              <li><a class="nav-link" href="#booking-receipt">Booking receipt</a></li>
+              <li><a class="nav-link" href="#menu-item">Menu item</a></li>
             </ul>
           </div>
         </nav>
@@ -242,12 +250,12 @@ const spacingTokens = [
                 </div>
               </div>
             </div>
-            <div class="border-t border-hb-neutral-400 p-5 sm:flex sm:items-center sm:justify-between">
+            <div class="border-t border-hb-neutral-400 p-5">
               <div>
                 <p class="text-xs font-semibold">Interaction</p>
                 <p class="mt-1 text-xs text-hb-neutral-600">Hover transitions to neutral-800. Keyboard focus uses neutral-100 and terracotta-600 rings.</p>
               </div>
-              <code class="mt-4 block rounded-lg bg-hb-neutral-100 px-3 py-2 font-mono text-[11px] text-hb-neutral-700 sm:mt-0">&lt;BaseButton&gt;Confirm booking&lt;/BaseButton&gt;</code>
+              <pre class="mt-4 overflow-x-auto rounded-lg bg-hb-neutral-100 px-3 py-2"><code class="whitespace-nowrap font-mono text-[11px] text-hb-neutral-700">&lt;BaseButton&gt;Confirm booking&lt;/BaseButton&gt;</code></pre>
             </div>
           </div>
 
@@ -270,6 +278,116 @@ const spacingTokens = [
           </div>
         </section>
 
+        <section id="booking-receipt" class="section-block border-t border-hb-neutral-400/70">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">02 · Components</p>
+              <h2 class="section-title">Booking receipt</h2>
+            </div>
+            <p class="section-description">A compact confirmation summary that makes stay dates, charges, and payment details easy to scan.</p>
+          </div>
+
+          <div class="mt-10 overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-0">
+            <div class="grid min-h-144 place-items-center overflow-hidden bg-hb-neutral-100 px-4 py-12 sm:px-8">
+              <BookingReceipt
+                receipt-number="MS-2026"
+                confirmation-code="0421-AH"
+                :check-in="{ iso: '2026-04-25', time: '15:00' }"
+                :check-out="{ iso: '2026-04-29', time: '11:00' }"
+                :items="receiptItems"
+                :total="730.4"
+                currency="EUR"
+                payment-provider="Wise"
+                payment-currency="GBP"
+              />
+            </div>
+            <div class="border-t border-hb-neutral-400 p-5">
+              <p class="text-xs font-semibold">Usage</p>
+              <p class="mt-1 text-xs leading-5 text-hb-neutral-600">Provide ISO dates and numeric amounts; the component formats dates and currency according to its locale and currency props.</p>
+              <pre class="mt-4 overflow-x-auto rounded-lg bg-hb-neutral-100 px-3 py-2"><code class="whitespace-nowrap font-mono text-[11px] text-hb-neutral-700">&lt;BookingReceipt :items=&quot;items&quot; :total=&quot;730.4&quot; currency=&quot;EUR&quot; /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="mt-8 grid gap-5 sm:grid-cols-3">
+            <article class="guideline-card">
+              <span class="guideline-number">01</span>
+              <h3>Use confirmed values</h3>
+              <p>Show final stay dates and settled charges rather than estimates.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">02</span>
+              <h3>Keep labels concise</h3>
+              <p>Preserve a clean edge between descriptions and right-aligned amounts.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">03</span>
+              <h3>Localize the details</h3>
+              <p>Pass the appropriate locale and currency for each booking.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="menu-item" class="section-block border-t border-hb-neutral-400/70">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">03 · Components</p>
+              <h2 class="section-title">Menu item</h2>
+            </div>
+            <p class="section-description">A compact navigation action that pairs a clear label with an optional icon and item count.</p>
+          </div>
+
+          <div class="mt-10 overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-0">
+            <div class="grid min-h-72 place-items-center bg-hb-neutral-100 p-8">
+              <div class="w-full max-w-sm rounded-xl border border-hb-neutral-400 bg-hb-neutral-100 p-4 sm:p-5">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-hb-neutral-600">Menu item states</p>
+                <div class="mt-4 space-y-4">
+                  <div>
+                    <p class="mb-1.5 text-[10px] font-medium text-hb-neutral-600">Default</p>
+                    <MenuItem :count="1">Your stay</MenuItem>
+                  </div>
+                  <div>
+                    <p class="mb-1.5 text-[10px] font-medium text-hb-neutral-600">Hover</p>
+                    <MenuItem class="menu-item-demo" data-demo-state="hover" :count="1">Your stay</MenuItem>
+                  </div>
+                  <div>
+                    <p class="mb-1.5 text-[10px] font-medium text-hb-neutral-600">Active</p>
+                    <MenuItem class="menu-item-demo" data-demo-state="active" :count="1">Your stay</MenuItem>
+                  </div>
+                  <div>
+                    <p class="mb-1.5 text-[10px] font-medium text-hb-neutral-600">Keyboard focus</p>
+                    <MenuItem class="menu-item-demo" data-demo-state="focus" :count="1">Your stay</MenuItem>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-t border-hb-neutral-400 p-5">
+              <div>
+                <p class="text-xs font-semibold">Interaction</p>
+                <p class="mt-1 text-xs text-hb-neutral-600">Transparent by default, with neutral surfaces for hover and active states, plus a terracotta keyboard-focus ring.</p>
+              </div>
+              <pre class="mt-4 overflow-x-auto rounded-lg bg-hb-neutral-100 px-3 py-2"><code class="whitespace-nowrap font-mono text-[11px] text-hb-neutral-700">&lt;MenuItem :count=&quot;1&quot;&gt;Your stay&lt;/MenuItem&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="mt-8 grid gap-5 sm:grid-cols-3">
+            <article class="guideline-card">
+              <span class="guideline-number">01</span>
+              <h3>Keep labels brief</h3>
+              <p>Use a short noun or phrase that makes the destination easy to scan.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">02</span>
+              <h3>Use counts meaningfully</h3>
+              <p>Show the badge only when the number helps someone understand available content.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">03</span>
+              <h3>Preserve the rhythm</h3>
+              <p>Keep the component at 40px high with consistent spacing between grouped items.</p>
+            </article>
+          </div>
+        </section>
+
         <footer class="border-t border-hb-neutral-400/70 px-5 py-10 sm:px-10 xl:px-16">
           <div class="flex flex-col gap-3 text-xs text-hb-neutral-600 sm:flex-row sm:items-center sm:justify-between">
             <p>Haven Design System · Built for calm, confident journeys.</p>
@@ -280,3 +398,21 @@ const spacingTokens = [
     </div>
   </div>
 </template>
+
+<style scoped>
+.menu-item-demo[data-demo-state="hover"] {
+  background: var(--color-hb-neutral-0);
+}
+
+.menu-item-demo[data-demo-state="active"] {
+  background: var(--color-hb-neutral-200);
+  color: var(--color-hb-neutral-900);
+}
+
+.menu-item-demo[data-demo-state="focus"] {
+  background: var(--color-hb-neutral-0);
+  box-shadow:
+    0 0 0 2px var(--color-hb-neutral-100),
+    0 0 0 4px var(--color-hb-terracotta-600);
+}
+</style>
