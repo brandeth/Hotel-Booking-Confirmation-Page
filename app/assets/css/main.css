@@ -64,6 +64,14 @@
   --hb-text-preset-10-font-weight: 400;
   --hb-text-preset-10-line-height: 1.4;
   --hb-text-preset-10-letter-spacing: 1px;
+
+  --background-image-welcome-card: radial-gradient(
+    circle at 50% 0%,
+    var(--color-hb-terracotta-400) 0%,
+    var(--color-hb-terracotta-500) 50%,
+    var(--color-hb-terracotta-700) 100%
+  );
+  --shadow-welcome-card: 0 20px 40px -20px var(--color-hb-terracotta-500);
 }
 
 @utility text-preset-1 {
