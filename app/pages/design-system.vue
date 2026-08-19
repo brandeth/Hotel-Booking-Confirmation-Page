@@ -49,6 +49,17 @@ const accentColors = [
   ] },
 ]
 
+const textPresets = [
+  { name: 'text-preset-1', className: 'text-preset-1', family: 'Fraunces', style: 'Regular', size: '40px', leading: '120%', tracking: '-0.5px' },
+  { name: 'text-preset-1-italic', className: 'text-preset-1-italic', family: 'Fraunces', style: 'Italic', size: '40px', leading: '120%', tracking: '-0.5px' },
+  { name: 'text-preset-4', className: 'text-preset-4', family: 'Fraunces', style: 'Regular', size: '20px', leading: '140%', tracking: '-0.1px' },
+  { name: 'text-preset-4-italic', className: 'text-preset-4-italic', family: 'Fraunces', style: 'Italic', size: '20px', leading: '140%', tracking: '-0.1px' },
+  { name: 'text-preset-5', className: 'text-preset-5', family: 'Fraunces', style: 'Regular', size: '14px', leading: '140%', tracking: '0px' },
+  { name: 'text-preset-5-medium', className: 'text-preset-5-medium', family: 'DM Sans', style: 'Medium', size: '14px', leading: '120%', tracking: '0px' },
+  { name: 'text-preset-5-semibold', className: 'text-preset-5-semibold', family: 'DM Sans', style: 'SemiBold', size: '14px', leading: '120%', tracking: '0.3px' },
+  { name: 'text-preset-10', className: 'text-preset-10', family: 'DM Mono', style: 'Regular', size: '10px', leading: '140%', tracking: '1px' },
+]
+
 const spacingTokens = [
   { name: '1', value: '4px', width: '4px' },
   { name: '2', value: '8px', width: '8px' },
@@ -168,29 +179,17 @@ const spacingTokens = [
               <p class="eyebrow">02 · Foundations</p>
               <h2 class="section-title">Typography</h2>
             </div>
-            <p class="section-description">A direct, humanist type system that keeps booking details effortless to scan at every size.</p>
+            <p class="section-description">Named text presets from the style guide. Use the class, not one-off size and tracking values.</p>
           </div>
 
           <div class="mt-10 overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-0">
-            <div class="type-row">
-              <div class="type-meta"><span>Display</span><span>64 / 62</span></div>
-              <p class="text-5xl font-semibold leading-none tracking-[-0.05em] sm:text-6xl">Your stay, beautifully simple.</p>
-            </div>
-            <div class="type-row">
-              <div class="type-meta"><span>Heading 1</span><span>40 / 44</span></div>
-              <p class="text-4xl font-semibold leading-tight tracking-[-0.035em]">Booking confirmed</p>
-            </div>
-            <div class="type-row">
-              <div class="type-meta"><span>Heading 2</span><span>28 / 34</span></div>
-              <p class="text-3xl font-semibold leading-tight tracking-[-0.025em]">Your reservation details</p>
-            </div>
-            <div class="type-row">
-              <div class="type-meta"><span>Body</span><span>16 / 26</span></div>
-              <p class="max-w-2xl text-base leading-relaxed text-hb-neutral-700">We’ve saved your room and sent the details to your inbox. Everything you need for a smooth arrival is right here.</p>
-            </div>
-            <div class="type-row">
-              <div class="type-meta"><span>Label</span><span>12 / 16</span></div>
-              <p class="text-xs font-semibold uppercase tracking-[0.16em] text-hb-neutral-600">Check-in · Friday, 18 September</p>
+            <div v-for="preset in textPresets" :key="preset.name" class="type-row">
+              <div class="type-meta">
+                <span>{{ preset.name }}</span>
+                <span>{{ preset.family }} · {{ preset.style }}</span>
+                <span>{{ preset.size }} / {{ preset.leading }} / {{ preset.tracking }}</span>
+              </div>
+              <p :class="preset.className">The quick brown fox jumps over the lazy dog.</p>
             </div>
           </div>
         </section>
