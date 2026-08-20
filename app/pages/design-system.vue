@@ -52,11 +52,16 @@ const accentColors = [
 const textPresets = [
   { name: 'text-preset-1', className: 'text-preset-1', family: 'Fraunces', style: 'Regular', size: '40px', leading: '120%', tracking: '-0.5px' },
   { name: 'text-preset-1-italic', className: 'text-preset-1-italic', family: 'Fraunces', style: 'Italic', size: '40px', leading: '120%', tracking: '-0.5px' },
+  { name: 'text-preset-2', className: 'text-preset-2', family: 'Fraunces', style: 'Regular', size: '32px', leading: '120%', tracking: '-0.25px' },
+  { name: 'text-preset-3', className: 'text-preset-3', family: 'Fraunces', style: 'Regular', size: '24px', leading: '140%', tracking: '-0.2px' },
   { name: 'text-preset-4', className: 'text-preset-4', family: 'Fraunces', style: 'Regular', size: '20px', leading: '140%', tracking: '-0.1px' },
   { name: 'text-preset-4-italic', className: 'text-preset-4-italic', family: 'Fraunces', style: 'Italic', size: '20px', leading: '140%', tracking: '-0.1px' },
   { name: 'text-preset-5', className: 'text-preset-5', family: 'Fraunces', style: 'Regular', size: '14px', leading: '140%', tracking: '0px' },
   { name: 'text-preset-5-medium', className: 'text-preset-5-medium', family: 'DM Sans', style: 'Medium', size: '14px', leading: '120%', tracking: '0px' },
   { name: 'text-preset-5-semibold', className: 'text-preset-5-semibold', family: 'DM Sans', style: 'SemiBold', size: '14px', leading: '120%', tracking: '0.3px' },
+  { name: 'text-preset-7', className: 'text-preset-7', family: 'DM Sans', style: 'Regular', size: '12px', leading: '120%', tracking: '0.4px' },
+  { name: 'text-preset-8', className: 'text-preset-8', family: 'DM Mono', style: 'Regular', size: '12px', leading: '140%', tracking: '2px' },
+  { name: 'text-preset-9', className: 'text-preset-9', family: 'DM Mono', style: 'Regular', size: '12px', leading: '140%', tracking: '0px' },
   { name: 'text-preset-10', className: 'text-preset-10', family: 'DM Mono', style: 'Regular', size: '10px', leading: '140%', tracking: '1px' },
 ]
 

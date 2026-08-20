@@ -66,38 +66,42 @@ const formatAmount = (amount: number) => new Intl.NumberFormat(props.locale, {
     <header class="receipt-header">
       <div>
         <p class="text-preset-10 text-hb-neutral-600">Receipt</p>
-        <h1 id="receipt-title" class="receipt-title">Your stay</h1>
+        <h1 id="receipt-title" class="text-preset-4 text-hb-neutral-900">Your stay</h1>
       </div>
 
       <p class="receipt-reference text-preset-10 text-hb-neutral-600">
-        <span>№ {{ receiptNumber }}</span>
+        <span>№&nbsp;{{ receiptNumber }}</span>
         <span>{{ confirmationCode }}</span>
       </p>
     </header>
 
     <section class="stay-dates" aria-label="Stay dates">
-      <div v-for="(stayDate, label) in { 'Check in': checkIn, 'Check out': checkOut }" :key="label" class="stay-date">
+      <div v-for="(stayDate, label) in { 'Check In': checkIn, 'Check Out': checkOut }" :key="label" class="stay-date">
         <p class="text-preset-10 text-hb-neutral-600">{{ label }}</p>
-        <p class="stay-date-value">
+        <p class="stay-date-value text-preset-2 text-hb-neutral-900">
           {{ dateParts(stayDate.iso).day }} {{ dateParts(stayDate.iso).month }}
         </p>
-        <p class="stay-date-meta">
+        <p class="stay-date-meta text-preset-7 text-hb-neutral-700">
           {{ dateParts(stayDate.iso).weekday }} · {{ stayDate.time }}
         </p>
       </div>
     </section>
 
     <section class="receipt-items" aria-label="Charges">
-      <div v-for="item in items" :key="item.label" class="receipt-row" :class="{ 'receipt-row-muted': item.muted }">
-        <span>{{ item.label }}</span>
-        <span class="receipt-amount">{{ currencySymbol }}&nbsp;{{ formatAmount(item.amount) }}</span>
+      <div v-for="item in items" :key="item.label" class="receipt-row">
+        <span class="text-preset-5 text-hb-neutral-900">{{ item.label }}</span>
+        <span class="receipt-amount text-preset-9 text-hb-neutral-900">
+          <span>{{ currencySymbol }}</span>
+          <span>{{ formatAmount(item.amount) }}</span>
+        </span>
       </div>
     </section>
 
     <section class="receipt-total" aria-label="Total paid">
-      <p class="receipt-total-label">Total paid</p>
-      <p class="receipt-total-value">
-        <span aria-hidden="true">{{ currencySymbol }}</span>{{ formatAmount(total) }}
+      <p class="text-preset-8 text-hb-neutral-600">Total paid</p>
+      <p class="receipt-total-value text-preset-3 text-hb-neutral-900">
+        <span>{{ currencySymbol }}</span>
+        <span>{{ formatAmount(total) }}</span>
       </p>
     </section>
 
@@ -134,18 +138,12 @@ const formatAmount = (amount: number) => new Intl.NumberFormat(props.locale, {
   border-bottom: 1px dashed var(--color-hb-neutral-400);
 }
 
-.receipt-title,
-.stay-date-value,
 .receipt-total-value {
-  font-family: Georgia, "Times New Roman", ui-serif, serif;
-  font-weight: 500;
-}
-
-.receipt-title {
-  margin-top: 6px;
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: -0.015em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.25em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .receipt-reference {
@@ -171,17 +169,11 @@ const formatAmount = (amount: number) => new Intl.NumberFormat(props.locale, {
 
 .stay-date-value {
   margin-top: 10px;
-  font-size: 32px;
-  line-height: 34px;
-  letter-spacing: -0.035em;
   white-space: nowrap;
 }
 
 .stay-date-meta {
   margin-top: 1px;
-  color: var(--color-hb-neutral-700);
-  font-size: 14px;
-  line-height: 20px;
   white-space: nowrap;
 }
 
@@ -198,18 +190,13 @@ const formatAmount = (amount: number) => new Intl.NumberFormat(props.locale, {
   align-items: baseline;
   justify-content: space-between;
   gap: 16px;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-.receipt-row-muted {
-  color: var(--color-hb-neutral-700);
 }
 
 .receipt-amount {
+  display: flex;
   flex: none;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 13px;
+  align-items: baseline;
+  gap: 0.25em;
   font-variant-numeric: tabular-nums;
 }
 
@@ -221,28 +208,9 @@ const formatAmount = (amount: number) => new Intl.NumberFormat(props.locale, {
   gap: 16px;
 }
 
-.receipt-total-label {
-  color: var(--color-hb-neutral-600);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.receipt-total-value {
-  display: flex;
-  align-items: baseline;
-  gap: 3px;
-  font-size: 28px;
-  line-height: 32px;
-  letter-spacing: -0.035em;
-  font-variant-numeric: tabular-nums;
-}
-
 .receipt-footer {
   display: flex;
-  align-items: end;
+  align-items: center;
   justify-content: space-between;
   gap: 20px;
 }
@@ -258,18 +226,6 @@ const formatAmount = (amount: number) => new Intl.NumberFormat(props.locale, {
     height: auto;
     min-height: 420px;
     padding-inline: 20px;
-  }
-
-  .stay-date-value {
-    font-size: 28px;
-  }
-
-  .stay-date-meta {
-    font-size: 12px;
-  }
-
-  .receipt-row {
-    font-size: 13px;
   }
 }
 </style>
