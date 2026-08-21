@@ -102,6 +102,7 @@
     var(--color-hb-terracotta-700) 100%
   );
   --shadow-welcome-card: 0 20px 40px -20px var(--color-hb-terracotta-500);
+  --shadow-weather-card: 0 1px 0 rgb(0 0 0 / 4%), 0 10px 24px -16px color-mix(in srgb, var(--color-hb-terracotta-500) 40%, transparent);
 }
 
 @utility text-preset-1 {
