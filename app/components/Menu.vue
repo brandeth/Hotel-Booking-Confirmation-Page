@@ -7,7 +7,7 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <nav :aria-label="label" class="flex flex-col">
+  <nav :aria-label="label" class="flex flex-col space-y-1">
     <slot />
   </nav>
 </template>

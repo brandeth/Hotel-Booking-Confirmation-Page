@@ -17,54 +17,32 @@ const receiptItems = [
     <Sidebar />
 
     <main
-      class="flex min-w-0 flex-1 items-start justify-center overflow-hidden px-6 py-16 sm:px-10 lg:px-16"
+      class="flex min-w-0 flex-1 flex-col overflow-hidden px-10 py-8"
     >
-      <div class="flex flex-col items-center">
-        <div class="relative flex shrink-0 items-start">
-          <div class="relative z-0 w-[400px] shrink-0 -rotate-4">
-            <BookingReceipt
-              receipt-number="MS-2026"
-              confirmation-code="0421-AH"
-              :check-in="{ iso: '2026-04-25', time: '15:00' }"
-              :check-out="{ iso: '2026-04-29', time: '11:00' }"
-              :items="receiptItems"
-              :total="730.4"
-              currency="EUR"
-              payment-provider="Wise"
-              payment-currency="GBP"
-            />
-          </div>
-          <div class="relative -ml-1.5 z-10 w-[400px] shrink-0 rotate-4">
-            <WelcomeCard
-              host-name="Margaux."
-              message="We're so glad you're coming. The shutters will be open, the lemonade cold, and the cat – Poivre – pretending not to notice you."
-              room-name="La Garrigue"
-            />
-          </div>
-        </div>
+      <DashboardHeader guest-name="Lucia." />
 
-        <p
-          class="mt-10 flex items-center gap-2 text-preset-8 text-hb-neutral-600"
-        >
-          <img
-            src="~/assets/images/symbol.svg"
-            alt=""
-            width="8"
-            height="8"
-            class="size-2"
-            aria-hidden="true"
+      <StaySummary class="mt-12 self-center">
+        <template #receipt>
+          <BookingReceipt
+            receipt-number="MS-2026"
+            confirmation-code="0421-AH"
+            :check-in="{ iso: '2026-04-25', time: '15:00' }"
+            :check-out="{ iso: '2026-04-29', time: '11:00' }"
+            :items="receiptItems"
+            :total="730.4"
+            currency="EUR"
+            payment-provider="Wise"
+            payment-currency="GBP"
           />
-          Hover to fan
-          <img
-            src="~/assets/images/symbol.svg"
-            alt=""
-            width="8"
-            height="8"
-            class="size-2"
-            aria-hidden="true"
+        </template>
+        <template #welcome>
+          <WelcomeCard
+            host-name="Margaux."
+            message="We're so glad you're coming. The shutters will be open, the lemonade cold, and the cat – Poivre – pretending not to notice you."
+            room-name="La Garrigue"
           />
-        </p>
-      </div>
+        </template>
+      </StaySummary>
     </main>
   </div>
 </template>
