@@ -1,9 +1,11 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
   count?: number | string
+  selected?: boolean
   type?: 'button' | 'submit' | 'reset'
 }>(), {
   count: undefined,
+  selected: false,
   type: 'button',
 })
 </script>
@@ -11,7 +13,9 @@ withDefaults(defineProps<{
 <template>
   <button
     :type="type"
-    class="flex h-10 w-full items-center gap-2 rounded-lg border-0 bg-transparent px-3 py-2.5 text-sm font-medium leading-5 text-hb-neutral-700 transition-colors duration-200 ease-out hover:bg-hb-neutral-0 active:bg-hb-neutral-200 active:text-hb-neutral-900 focus-visible:bg-hb-neutral-0 focus-visible:outline-none focus-visible:shadow-[0_0_0_2px_var(--color-hb-neutral-100),0_0_0_4px_var(--color-hb-terracotta-600)] disabled:cursor-not-allowed disabled:opacity-50"
+    :aria-current="selected ? 'page' : undefined"
+    class="flex h-10 w-full items-center gap-2 rounded-lg border-0 px-3 py-2.5 text-sm font-medium leading-5 transition-colors duration-200 ease-out hover:bg-hb-neutral-0 active:bg-hb-neutral-200 active:text-hb-neutral-900 focus-visible:bg-hb-neutral-0 focus-visible:outline-none focus-visible:shadow-[0_0_0_2px_var(--color-hb-neutral-100),0_0_0_4px_var(--color-hb-terracotta-600)] disabled:cursor-not-allowed disabled:opacity-50"
+    :class="selected ? 'bg-hb-neutral-0 text-hb-neutral-900' : 'bg-transparent text-hb-neutral-700'"
   >
     <span class="grid size-5 shrink-0 place-items-center" aria-hidden="true">
       <slot name="icon">
