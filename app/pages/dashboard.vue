@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import keyIcon from '~/assets/images/key.svg?raw'
+import wirelessIcon from '~/assets/images/wireless.svg?raw'
+import foodAltIcon from '~/assets/images/food-alt.svg?raw'
+
 useSeoMeta({
   title: "Your stay — Maison Soleil",
   description:
@@ -10,6 +14,45 @@ const receiptItems = [
   { label: "Breakfast × 2 guests", amount: 96 },
   { label: "Tourist tax", amount: 14.4, muted: true },
 ];
+
+const stayInfoCards: {
+  label: string
+  checkInfo: string
+  date?: string
+  instructions?: string
+  wifi?: { network: string, password: string }
+  iconBgClass: string
+  accentClass: string
+  icon: string
+}[] = [
+  {
+    label: 'Arrival',
+    checkInfo: 'Check-in from 15:00',
+    date: 'Sat, 25 April',
+    instructions: 'Ring the brass bell by the blue door. If we\'re at the market, the key is in the terracotta pot by the olive tree.',
+    iconBgClass: 'bg-hb-terracotta-600',
+    accentClass: 'text-hb-terracotta-600',
+    icon: keyIcon,
+  },
+  {
+    label: 'Wi-Fi',
+    checkInfo: 'Le Soleil · Guest',
+    date: 'Password below',
+    wifi: { network: 'Le Soleil · Guest', password: 'soleil-2026' },
+    iconBgClass: 'bg-hb-blue-500',
+    accentClass: 'text-hb-blue-500',
+    icon: wirelessIcon,
+  },
+  {
+    label: 'Breakfast',
+    checkInfo: 'Served 8 – 10:30',
+    date: 'On the terrace',
+    instructions: 'Fresh figs, Marseille honey, pain au levain, and espresso. Gluten-free option? Leave a note the night before.',
+    iconBgClass: 'bg-hb-rose-500',
+    accentClass: 'text-hb-rose-500',
+    icon: foodAltIcon,
+  },
+]
 </script>
 
 <template>
@@ -17,11 +60,11 @@ const receiptItems = [
     <Sidebar />
 
     <main
-      class="flex min-w-0 flex-1 flex-col overflow-hidden px-10 py-8"
+      class="flex min-w-0 flex-1 flex-col overflow-y-auto px-8 py-8 xl:px-10"
     >
       <DashboardHeader guest-name="Lucia." />
 
-      <StaySummary class="mt-12 self-center">
+      <StaySummary class="mt-8 self-center xl:mt-12">
         <template #receipt>
           <BookingReceipt
             receipt-number="MS-2026"
@@ -43,6 +86,25 @@ const receiptItems = [
           />
         </template>
       </StaySummary>
+
+      <ul class="mt-8 grid list-none grid-cols-1 gap-[24px] md:grid-cols-2 xl:mt-12 xl:grid-cols-3">
+        <li v-for="(card, index) in stayInfoCards" :key="card.label">
+          <StayInfoCard
+            :label="card.label"
+            :count="index + 1"
+            :check-info="card.checkInfo"
+            :date="card.date"
+            :instructions="card.instructions"
+            :wifi="card.wifi"
+            :icon-bg-class="card.iconBgClass"
+            :accent-class="card.accentClass"
+          >
+            <template #icon>
+              <span class="grid size-6 place-items-center [&_svg]:size-6" v-html="card.icon" />
+            </template>
+          </StayInfoCard>
+        </li>
+      </ul>
     </main>
   </div>
 </template>

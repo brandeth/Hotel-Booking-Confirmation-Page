@@ -17,7 +17,7 @@ const titleId = useId()
 
 <template>
   <article
-    class="flex h-[420px] w-[400px] max-w-full flex-col gap-5 rounded-[20px] bg-welcome-card p-6 shadow-welcome-card"
+    class="flex h-[420px] w-[340px] max-w-full flex-col gap-5 rounded-[20px] bg-welcome-card p-6 shadow-welcome-card xl:w-[400px]"
     :aria-labelledby="titleId"
   >
     <header class="flex items-start justify-between border-t border-dashed border-hb-terracotta-400 pt-4">

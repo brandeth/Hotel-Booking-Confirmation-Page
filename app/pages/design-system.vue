@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import keyIcon from '~/assets/images/key.svg?raw'
+import wirelessIcon from '~/assets/images/wireless.svg?raw'
+
 definePageMeta({
   name: 'design-system',
 })
@@ -57,8 +60,10 @@ const textPresets = [
   { name: 'text-preset-4', className: 'text-preset-4', family: 'Fraunces', style: 'Regular', size: '20px', leading: '140%', tracking: '-0.1px' },
   { name: 'text-preset-4-italic', className: 'text-preset-4-italic', family: 'Fraunces', style: 'Italic', size: '20px', leading: '140%', tracking: '-0.1px' },
   { name: 'text-preset-5', className: 'text-preset-5', family: 'Fraunces', style: 'Regular', size: '14px', leading: '140%', tracking: '0px' },
+  { name: 'text-preset-5-regular', className: 'text-preset-5-regular', family: 'DM Sans', style: 'Regular', size: '14px', leading: '140%', tracking: '0px' },
   { name: 'text-preset-5-medium', className: 'text-preset-5-medium', family: 'DM Sans', style: 'Medium', size: '14px', leading: '120%', tracking: '0px' },
   { name: 'text-preset-5-semibold', className: 'text-preset-5-semibold', family: 'DM Sans', style: 'SemiBold', size: '14px', leading: '120%', tracking: '0.3px' },
+  { name: 'text-preset-6', className: 'text-preset-6', family: 'DM Sans', style: 'Medium', size: '14px', leading: '120%', tracking: '0.8px' },
   { name: 'text-preset-7', className: 'text-preset-7', family: 'DM Sans', style: 'Regular', size: '12px', leading: '120%', tracking: '0.4px' },
   { name: 'text-preset-8', className: 'text-preset-8', family: 'DM Mono', style: 'Regular', size: '12px', leading: '140%', tracking: '2px' },
   { name: 'text-preset-9', className: 'text-preset-9', family: 'DM Mono', style: 'Regular', size: '12px', leading: '140%', tracking: '0px' },
@@ -120,6 +125,7 @@ const receiptItems = [
               <li><a class="nav-link" href="#booking-receipt">Booking receipt</a></li>
               <li><a class="nav-link" href="#menu-item">Menu item</a></li>
               <li><a class="nav-link" href="#welcome-card">Welcome card</a></li>
+              <li><a class="nav-link" href="#stay-info-card">Stay info card</a></li>
             </ul>
           </div>
         </nav>
@@ -433,6 +439,72 @@ const receiptItems = [
               <span class="guideline-number">03</span>
               <h3>Pair with the receipt</h3>
               <p>Match the 400×420 footprint so the welcome card and booking receipt can sit side by side.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="stay-info-card" class="section-block border-t border-hb-neutral-400/70">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">05 · Components</p>
+              <h2 class="section-title">Stay info card</h2>
+            </div>
+            <p class="section-description">A stay-detail card for arrival notes, Wi-Fi credentials, and breakfast hours. Height follows the copy; siblings in a row stretch to match.</p>
+          </div>
+
+          <div class="mt-10 overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-0">
+            <div class="grid min-h-144 place-items-center bg-hb-neutral-100 px-4 py-12 sm:px-8">
+              <div class="grid w-full max-w-3xl grid-cols-1 gap-[24px] md:grid-cols-2">
+                <StayInfoCard
+                  label="Arrival"
+                  :count="1"
+                  check-info="Check-in from 15:00"
+                  date="Sat, 25 April"
+                  instructions="Ring the brass bell by the blue door. If we're at the market, the key is in the terracotta pot by the olive tree."
+                  icon-bg-class="bg-hb-terracotta-600"
+                  accent-class="text-hb-terracotta-600"
+                >
+                  <template #icon>
+                    <span class="grid size-6 place-items-center [&_svg]:size-6" v-html="keyIcon" />
+                  </template>
+                </StayInfoCard>
+                <StayInfoCard
+                  label="Wi-Fi"
+                  :count="2"
+                  check-info="Le Soleil · Guest"
+                  date="Password below"
+                  :wifi="{ network: 'Le Soleil · Guest', password: 'soleil-2026' }"
+                  icon-bg-class="bg-hb-blue-500"
+                  accent-class="text-hb-blue-500"
+                >
+                  <template #icon>
+                    <span class="grid size-6 place-items-center [&_svg]:size-6" v-html="wirelessIcon" />
+                  </template>
+                </StayInfoCard>
+              </div>
+            </div>
+            <div class="border-t border-hb-neutral-400 p-5">
+              <p class="text-xs font-semibold">Usage</p>
+              <p class="mt-1 text-xs leading-5 text-hb-neutral-600">Pass instructions for narrative cards, or a wifi object for network and password rows. Count is padded from the loop index.</p>
+              <pre class="mt-4 overflow-x-auto rounded-lg bg-hb-neutral-100 px-3 py-2"><code class="whitespace-nowrap font-mono text-[11px] text-hb-neutral-700">&lt;StayInfoCard label=&quot;Arrival&quot; :count=&quot;1&quot; check-info=&quot;Check-in from 15:00&quot; /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="mt-8 grid gap-5 sm:grid-cols-3">
+            <article class="guideline-card">
+              <span class="guideline-number">01</span>
+              <h3>One body per card</h3>
+              <p>Use instructions or Wi-Fi credentials, not both. Keep the details heading and date as the shared summary.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">02</span>
+              <h3>Match the accent</h3>
+              <p>Icon well, label, and count should share the same accent so Arrival, Wi-Fi, and Breakfast stay distinct.</p>
+            </article>
+            <article class="guideline-card">
+              <span class="guideline-number">03</span>
+              <h3>Let the row grow</h3>
+              <p>Do not lock the height. Long instructions should wrap, and sibling cards stretch to the tallest.</p>
             </article>
           </div>
         </section>

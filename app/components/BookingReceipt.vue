@@ -221,6 +221,12 @@ const formatAmount = (amount: number) => new Intl.NumberFormat(props.locale, {
   flex: none;
 }
 
+@media (max-width: 1279px) {
+  .booking-receipt {
+    width: min(340px, 100%);
+  }
+}
+
 @media (max-width: 380px) {
   .booking-receipt {
     height: auto;

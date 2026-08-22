@@ -1,12 +1,30 @@
 <script setup lang="ts">
-const summaryId = useId()
+const summaryId = useId();
+const canFan = ref(false);
+
+let mediaQuery: MediaQueryList | undefined;
+
+function syncCanFan() {
+  canFan.value = mediaQuery?.matches ?? false;
+}
+
+onMounted(() => {
+  mediaQuery = window.matchMedia("(min-width: 1280px)");
+  syncCanFan();
+  mediaQuery.addEventListener("change", syncCanFan);
+});
+
+onBeforeUnmount(() => {
+  mediaQuery?.removeEventListener("change", syncCanFan);
+});
 </script>
 
 <template>
   <section
     class="stay-summary"
-    tabindex="0"
-    :aria-labelledby="summaryId"
+    :tabindex="canFan ? 0 : undefined"
+    :aria-labelledby="canFan ? summaryId : undefined"
+    aria-label="Stay summary"
   >
     <div class="stay-summary__stage">
       <img
@@ -16,7 +34,7 @@ const summaryId = useId()
         height="164"
         class="stay-summary__sun"
         aria-hidden="true"
-      >
+      />
 
       <div class="stay-summary__card stay-summary__card--receipt">
         <slot name="receipt" />
@@ -27,7 +45,11 @@ const summaryId = useId()
       </div>
     </div>
 
-    <p :id="summaryId" class="stay-summary__caption text-preset-8 text-hb-neutral-600">
+    <p
+      :id="summaryId"
+      class="stay-summary__caption text-preset-8 text-hb-neutral-600"
+      :aria-hidden="canFan ? undefined : true"
+    >
       <img
         src="~/assets/images/symbol.svg"
         alt=""
@@ -35,7 +57,7 @@ const summaryId = useId()
         height="8"
         class="size-2"
         aria-hidden="true"
-      >
+      />
       Hover to fan
       <img
         src="~/assets/images/symbol.svg"
@@ -44,7 +66,7 @@ const summaryId = useId()
         height="8"
         class="size-2"
         aria-hidden="true"
-      >
+      />
     </p>
   </section>
 </template>
@@ -72,6 +94,7 @@ const summaryId = useId()
   width: min(980px, 100%);
   align-items: flex-start;
   justify-content: center;
+  padding: 20px 24px;
 }
 
 .stay-summary__sun {
@@ -132,6 +155,36 @@ const summaryId = useId()
   margin-top: 40px;
 }
 
+@media (max-width: 1279px) {
+  .stay-summary__card {
+    width: 340px;
+  }
+
+  .stay-summary__card--welcome {
+    margin-left: -6px;
+  }
+
+  .stay-summary__caption {
+    display: none;
+  }
+
+  .stay-summary:hover .stay-summary__card--receipt,
+  .stay-summary:focus-within .stay-summary__card--receipt {
+    transform: rotate(-4deg);
+  }
+
+  .stay-summary:hover .stay-summary__card--welcome,
+  .stay-summary:focus-within .stay-summary__card--welcome {
+    transform: rotate(4deg);
+  }
+
+  .stay-summary:hover .stay-summary__sun,
+  .stay-summary:focus-within .stay-summary__sun {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .stay-summary__sun,
   .stay-summary__card {
@@ -149,6 +202,21 @@ const summaryId = useId()
 
   .stay-summary__card--welcome {
     transform: translateX(90px) rotate(-5deg);
+  }
+
+  @media (max-width: 1279px) {
+    .stay-summary__sun {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.85);
+    }
+
+    .stay-summary__card--receipt {
+      transform: rotate(-4deg);
+    }
+
+    .stay-summary__card--welcome {
+      transform: rotate(4deg);
+    }
   }
 }
 </style>
