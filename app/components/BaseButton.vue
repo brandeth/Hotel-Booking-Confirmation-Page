@@ -16,7 +16,7 @@ const variantClasses = computed(() => ({
 <template>
   <button
     :type="type"
-    class="inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold shadow-sm transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:shadow-[0_0_0_3px_var(--color-hb-neutral-100),0_0_0_5px_var(--color-hb-terracotta-600)] disabled:cursor-not-allowed"
+    class="text-preset-5-semibold inline-flex cursor-pointer items-center justify-center rounded-full px-4 py-2.5 shadow-sm transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:shadow-[0_0_0_3px_var(--color-hb-neutral-100),0_0_0_5px_var(--color-hb-terracotta-600)] disabled:cursor-not-allowed"
     :class="variantClasses"
   >
     <slot />
