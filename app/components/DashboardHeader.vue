@@ -11,7 +11,7 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <header class="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
+  <header class="flex flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
     <div>
       <p class="text-preset-8 text-hb-neutral-600">{{ statusLabel }}</p>
       <h1 class="text-preset-1 text-hb-neutral-900">
@@ -20,9 +20,11 @@ withDefaults(defineProps<{
       </h1>
     </div>
 
-    <div class="flex flex-wrap items-center gap-3">
-      <BaseButton variant="secondary">Print receipt</BaseButton>
-      <BaseButton>Add to calendar</BaseButton>
+    <!-- Below sm the two actions split the row; from sm they size to their
+         label and sit at the end of the header. -->
+    <div class="flex w-full items-center gap-4 sm:w-auto sm:flex-wrap sm:gap-3">
+      <BaseButton variant="secondary" class="flex-1 sm:flex-none">Print receipt</BaseButton>
+      <BaseButton class="flex-1 sm:flex-none">Add to calendar</BaseButton>
     </div>
   </header>
 </template>

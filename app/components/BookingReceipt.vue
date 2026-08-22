@@ -89,7 +89,7 @@ const formatAmount = (amount: number) => new Intl.NumberFormat(props.locale, {
 
     <section class="receipt-items" aria-label="Charges">
       <div v-for="item in items" :key="item.label" class="receipt-row">
-        <span class="text-preset-5 text-hb-neutral-900">{{ item.label }}</span>
+        <span class="text-preset-5-regular text-hb-neutral-900">{{ item.label }}</span>
         <span class="receipt-amount text-preset-9 text-hb-neutral-900">
           <span>{{ currencySymbol }}</span>
           <span>{{ formatAmount(item.amount) }}</span>
@@ -221,17 +221,35 @@ const formatAmount = (amount: number) => new Intl.NumberFormat(props.locale, {
   flex: none;
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 1279.98px) {
   .booking-receipt {
     width: min(340px, 100%);
   }
 }
 
-@media (max-width: 380px) {
+/*
+ * Below md the receipt fills the column and grows with its content — at a
+ * phone's width the rows wrap and 420px stops being enough. The min-heights on
+ * the sections above hold the rhythm now that the fixed box is gone; the 420px
+ * floor keeps the card from collapsing when the text is short.
+ */
+@media (max-width: 767.98px) {
   .booking-receipt {
+    width: 100%;
     height: auto;
     min-height: 420px;
     padding-inline: 20px;
+  }
+}
+
+/*
+ * Each date column is ~130px at 320px wide, where "Wednesday · 11:00" does not
+ * fit on one line — and the card's `overflow: hidden` would clip it rather than
+ * let it spill.
+ */
+@media (max-width: 359.98px) {
+  .stay-date-meta {
+    white-space: normal;
   }
 }
 </style>

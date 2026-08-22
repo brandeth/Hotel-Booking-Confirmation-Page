@@ -56,55 +56,59 @@ const stayInfoCards: {
 </script>
 
 <template>
-  <div class="flex min-h-screen bg-hb-neutral-100 text-hb-neutral-900">
-    <Sidebar />
+  <div class="min-h-screen bg-hb-neutral-100 text-hb-neutral-900">
+    <DashboardTopNav />
 
-    <main
-      class="flex min-w-0 flex-1 flex-col overflow-y-auto px-8 py-8 xl:px-10"
-    >
-      <DashboardHeader guest-name="Lucia." />
+    <div class="flex lg:min-h-screen">
+      <Sidebar />
 
-      <StaySummary class="mt-8 self-center xl:mt-12">
-        <template #receipt>
-          <BookingReceipt
-            receipt-number="MS-2026"
-            confirmation-code="0421-AH"
-            :check-in="{ iso: '2026-04-25', time: '15:00' }"
-            :check-out="{ iso: '2026-04-29', time: '11:00' }"
-            :items="receiptItems"
-            :total="730.4"
-            currency="EUR"
-            payment-provider="Wise"
-            payment-currency="GBP"
-          />
-        </template>
-        <template #welcome>
-          <WelcomeCard
-            host-name="Margaux."
-            message="We're so glad you're coming. The shutters will be open, the lemonade cold, and the cat – Poivre – pretending not to notice you."
-            room-name="La Garrigue"
-          />
-        </template>
-      </StaySummary>
+      <!-- overflow-x-clip, not overflow-y-auto: a non-visible overflow-y would
+           force overflow-x to auto and silently clip the stay summary. -->
+      <main class="flex min-w-0 flex-1 flex-col overflow-x-clip px-4 py-5 sm:px-6 sm:py-8 lg:px-8 xl:px-10">
+        <DashboardHeader guest-name="Lucia." />
 
-      <ul class="mt-8 grid list-none grid-cols-1 gap-[24px] md:grid-cols-2 xl:mt-12 xl:grid-cols-3">
-        <li v-for="(card, index) in stayInfoCards" :key="card.label">
-          <StayInfoCard
-            :label="card.label"
-            :count="index + 1"
-            :check-info="card.checkInfo"
-            :date="card.date"
-            :instructions="card.instructions"
-            :wifi="card.wifi"
-            :icon-bg-class="card.iconBgClass"
-            :accent-class="card.accentClass"
-          >
-            <template #icon>
-              <span class="grid size-6 place-items-center [&_svg]:size-6" v-html="card.icon" />
-            </template>
-          </StayInfoCard>
-        </li>
-      </ul>
-    </main>
+        <StaySummary class="mt-8 self-center xl:mt-12">
+          <template #receipt>
+            <BookingReceipt
+              receipt-number="MS-2026"
+              confirmation-code="0421-AH"
+              :check-in="{ iso: '2026-04-25', time: '15:00' }"
+              :check-out="{ iso: '2026-04-29', time: '11:00' }"
+              :items="receiptItems"
+              :total="730.4"
+              currency="EUR"
+              payment-provider="Wise"
+              payment-currency="GBP"
+            />
+          </template>
+          <template #welcome>
+            <WelcomeCard
+              host-name="Margaux."
+              message="We're so glad you're coming. The shutters will be open, the lemonade cold, and the cat – Poivre – pretending not to notice you."
+              room-name="La Garrigue"
+            />
+          </template>
+        </StaySummary>
+
+        <ul class="mt-8 grid list-none grid-cols-1 gap-6 md:grid-cols-2 xl:mt-12 xl:grid-cols-3">
+          <li v-for="(card, index) in stayInfoCards" :key="card.label">
+            <StayInfoCard
+              :label="card.label"
+              :count="index + 1"
+              :check-info="card.checkInfo"
+              :date="card.date"
+              :instructions="card.instructions"
+              :wifi="card.wifi"
+              :icon-bg-class="card.iconBgClass"
+              :accent-class="card.accentClass"
+            >
+              <template #icon>
+                <span class="grid size-6 place-items-center [&_svg]:size-6" v-html="card.icon" />
+              </template>
+            </StayInfoCard>
+          </li>
+        </ul>
+      </main>
+    </div>
   </div>
 </template>

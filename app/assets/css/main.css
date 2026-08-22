@@ -252,6 +252,7 @@
   font-style: normal;
   line-height: var(--hb-text-preset-10-line-height);
   letter-spacing: var(--hb-text-preset-10-letter-spacing);
+  text-transform: uppercase;
 }
 
 @layer base {
@@ -292,16 +293,6 @@
 }
 
 @layer components {
-  .text-preset-10 {
-    margin: 0;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 10px;
-    font-weight: 500;
-    line-height: 14px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
   .nav-link {
     display: block;
     border-radius: 0.5rem;

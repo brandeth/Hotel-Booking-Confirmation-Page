@@ -47,7 +47,7 @@ onBeforeUnmount(() => {
 
 <template>
   <article
-    class="flex h-full w-full flex-col gap-6 rounded-[24px] border border-hb-neutral-400 bg-hb-neutral-50 px-5 py-6 shadow-stay-info-card"
+    class="flex h-full w-full flex-col gap-6 rounded-[24px] border border-hb-neutral-400 bg-hb-neutral-50 px-4 py-6 shadow-stay-info-card sm:px-5"
     :aria-labelledby="titleId"
   >
     <header class="flex items-center justify-between gap-3">
@@ -81,7 +81,7 @@ onBeforeUnmount(() => {
             <span class="text-preset-7 text-hb-neutral-900">{{ wifi.password }}</span>
             <button
               type="button"
-              class="inline-flex h-5 items-center rounded-full border border-hb-neutral-400 pt-1 pr-2 pb-0.5 pl-2 text-preset-10 uppercase text-hb-neutral-600"
+              class="inline-flex h-5 items-center rounded-full border border-hb-neutral-400 pt-1 pr-2 pb-0.5 pl-2 text-preset-10 text-hb-neutral-600"
               :aria-label="copied ? 'Password copied' : 'Copy password'"
               @click="copyPassword"
             >
