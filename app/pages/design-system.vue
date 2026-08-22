@@ -21,66 +21,81 @@ useSeoMeta({
   twitterImage: `${requestUrl.origin}/og.png`,
 })
 
-const neutralColors = [
-  { name: 'neutral-900', value: '#2B2620' },
-  { name: 'neutral-800', value: '#3E3428' },
-  { name: 'neutral-700', value: '#5A4C3C' },
-  { name: 'neutral-600', value: '#7A6A57' },
-  { name: 'neutral-400', value: '#E4DED5' },
-  { name: 'neutral-200', value: '#F2EEEA' },
-  { name: 'neutral-100', value: '#FBF6EF' },
-  { name: 'neutral-50', value: '#FDFBF7' },
-  { name: 'neutral-0', value: '#FFFFFF' },
+// Token names only. Every value on this page is read back from main.css at
+// runtime, so the gallery cannot drift from the stylesheet it documents.
+const neutralTokens = [
+  'neutral-900',
+  'neutral-800',
+  'neutral-700',
+  'neutral-600',
+  'neutral-400',
+  'neutral-200',
+  'neutral-100',
+  'neutral-50',
+  'neutral-0',
 ]
 
-const accentColors = [
-  { family: 'Sun', colors: [
-    { name: 'sun-500', value: '#EDB63A' },
-    { name: 'sun-300', value: '#F5D98A' },
-    { name: 'sun-200', value: '#FFDE7A' },
-    { name: 'sun-50', value: '#FFF4DC' },
-  ] },
-  { family: 'Terracotta', colors: [
-    { name: 'terracotta-700', value: '#9F3E1D' },
-    { name: 'terracotta-600', value: '#B7411B' },
-    { name: 'terracotta-500', value: '#C25A2E' },
-    { name: 'terracotta-400', value: '#E07A3F' },
-  ] },
-  { family: 'Supporting', colors: [
-    { name: 'blue-500', value: '#5769C6' },
-    { name: 'rose-500', value: '#C04A72' },
-  ] },
+const accentGroups = [
+  { family: 'Sun', tokens: ['sun-500', 'sun-300', 'sun-200', 'sun-50'] },
+  { family: 'Terracotta', tokens: ['terracotta-700', 'terracotta-600', 'terracotta-500', 'terracotta-400'] },
+  { family: 'Supporting', tokens: ['blue-500', 'rose-500'] },
 ]
+
+const colorVar = (token: string) => `--color-hb-${token}`
+
+const colorValues = useCssVariables(
+  [...neutralTokens, ...accentGroups.flatMap(group => group.tokens)].map(colorVar),
+)
+
+const hexFor = (token: string) => {
+  const value = colorValues.value[colorVar(token)]
+
+  if (!value) {
+    return '—'
+  }
+
+  // Minified CSS hands back shorthand like #fff; show the full six-digit form.
+  return value.replace(/^#([0-9a-f])([0-9a-f])([0-9a-f])$/i, '#$1$1$2$2$3$3').toUpperCase()
+}
 
 const textPresets = [
-  { name: 'text-preset-1', className: 'text-preset-1', family: 'Fraunces', style: 'Regular', size: '40px', leading: '120%', tracking: '-0.5px' },
-  { name: 'text-preset-1-italic', className: 'text-preset-1-italic', family: 'Fraunces', style: 'Italic', size: '40px', leading: '120%', tracking: '-0.5px' },
-  { name: 'text-preset-2', className: 'text-preset-2', family: 'Fraunces', style: 'Regular', size: '32px', leading: '120%', tracking: '-0.25px' },
-  { name: 'text-preset-3', className: 'text-preset-3', family: 'Fraunces', style: 'Regular', size: '24px', leading: '140%', tracking: '-0.2px' },
-  { name: 'text-preset-4', className: 'text-preset-4', family: 'Fraunces', style: 'Regular', size: '20px', leading: '140%', tracking: '-0.1px' },
-  { name: 'text-preset-4-italic', className: 'text-preset-4-italic', family: 'Fraunces', style: 'Italic', size: '20px', leading: '140%', tracking: '-0.1px' },
-  { name: 'text-preset-5', className: 'text-preset-5', family: 'Fraunces', style: 'Regular', size: '14px', leading: '140%', tracking: '0px' },
-  { name: 'text-preset-5-regular', className: 'text-preset-5-regular', family: 'DM Sans', style: 'Regular', size: '14px', leading: '140%', tracking: '0px' },
-  { name: 'text-preset-5-medium', className: 'text-preset-5-medium', family: 'DM Sans', style: 'Medium', size: '14px', leading: '120%', tracking: '0px' },
-  { name: 'text-preset-5-semibold', className: 'text-preset-5-semibold', family: 'DM Sans', style: 'SemiBold', size: '14px', leading: '120%', tracking: '0.3px' },
-  { name: 'text-preset-6', className: 'text-preset-6', family: 'DM Sans', style: 'Medium', size: '14px', leading: '120%', tracking: '0.8px' },
-  { name: 'text-preset-7', className: 'text-preset-7', family: 'DM Sans', style: 'Regular', size: '12px', leading: '120%', tracking: '0.4px' },
-  { name: 'text-preset-8', className: 'text-preset-8', family: 'DM Mono', style: 'Regular', size: '12px', leading: '140%', tracking: '2px' },
-  { name: 'text-preset-9', className: 'text-preset-9', family: 'DM Mono', style: 'Regular', size: '12px', leading: '140%', tracking: '0px' },
-  { name: 'text-preset-10', className: 'text-preset-10', family: 'DM Mono', style: 'Regular', size: '10px', leading: '140%', tracking: '1px' },
+  'text-preset-1',
+  'text-preset-1-italic',
+  'text-preset-2',
+  'text-preset-3',
+  'text-preset-4',
+  'text-preset-4-italic',
+  'text-preset-5',
+  'text-preset-5-regular',
+  'text-preset-5-medium',
+  'text-preset-5-semibold',
+  'text-preset-6',
+  'text-preset-7',
+  'text-preset-8',
+  'text-preset-9',
+  'text-preset-10',
 ]
 
-const spacingTokens = [
-  { name: '1', value: '4px', width: '4px' },
-  { name: '2', value: '8px', width: '8px' },
-  { name: '3', value: '12px', width: '12px' },
-  { name: '4', value: '16px', width: '16px' },
-  { name: '5', value: '20px', width: '20px' },
-  { name: '6', value: '24px', width: '24px' },
-  { name: '8', value: '32px', width: '32px' },
-  { name: '12', value: '48px', width: '48px' },
-  { name: '16', value: '64px', width: '64px' },
-]
+// Measured off the rendered sample, not off the token declaration — so a
+// conflicting rule elsewhere in the cascade shows up here instead of hiding.
+const { typeRef, typeMetrics } = useTypeMetrics()
+
+const metricLines = (preset: string) => {
+  const metrics = typeMetrics.value[preset]
+
+  if (!metrics) {
+    return ['—', '—']
+  }
+
+  return [
+    `${metrics.family} · ${metrics.style}`,
+    [metrics.size, metrics.leading, metrics.tracking, metrics.transform].filter(Boolean).join(' / '),
+  ]
+}
+
+const spacingSteps = [1, 2, 3, 4, 5, 6, 8, 12, 16]
+
+const { widthRef, widths } = useMeasuredWidths()
 
 const receiptItems = [
   { label: 'Room · La Garrigue × 4 nights', amount: 620 },
@@ -169,24 +184,24 @@ const receiptItems = [
           <div class="mt-10">
             <h3 class="mb-4 text-sm font-semibold">Neutral</h3>
             <div class="grid overflow-hidden rounded-2xl border border-hb-neutral-400 sm:grid-cols-3 xl:grid-cols-5">
-              <article v-for="color in neutralColors" :key="color.name" class="group min-w-0 bg-hb-neutral-0 p-3">
-                <div class="aspect-[4/3] rounded-xl border border-black/5 shadow-inner" :style="{ backgroundColor: color.value }" />
+              <article v-for="token in neutralTokens" :key="token" class="group min-w-0 bg-hb-neutral-0 p-3">
+                <div class="aspect-[4/3] rounded-xl border border-black/5 shadow-inner" :style="{ backgroundColor: `var(${colorVar(token)})` }" />
                 <div class="mt-3 flex items-baseline justify-between gap-2 px-1">
-                  <span class="truncate text-xs font-semibold">{{ color.name }}</span>
-                  <span class="font-mono text-[10px] uppercase text-hb-neutral-600">{{ color.value }}</span>
+                  <span class="truncate text-xs font-semibold">{{ token }}</span>
+                  <span class="font-mono text-[10px] uppercase text-hb-neutral-600">{{ hexFor(token) }}</span>
                 </div>
               </article>
             </div>
           </div>
 
           <div class="mt-10 grid gap-8 xl:grid-cols-3">
-            <article v-for="family in accentColors" :key="family.family">
-              <h3 class="mb-4 text-sm font-semibold">{{ family.family }}</h3>
+            <article v-for="group in accentGroups" :key="group.family">
+              <h3 class="mb-4 text-sm font-semibold">{{ group.family }}</h3>
               <div class="overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-0">
-                <div v-for="color in family.colors" :key="color.name" class="flex items-center gap-4 border-b border-hb-neutral-200 p-3 last:border-b-0">
-                  <span class="size-12 shrink-0 rounded-xl border border-black/5 shadow-inner" :style="{ backgroundColor: color.value }" />
-                  <span class="min-w-0 flex-1 text-xs font-semibold">{{ color.name }}</span>
-                  <span class="font-mono text-[10px] uppercase text-hb-neutral-600">{{ color.value }}</span>
+                <div v-for="token in group.tokens" :key="token" class="flex items-center gap-4 border-b border-hb-neutral-200 p-3 last:border-b-0">
+                  <span class="size-12 shrink-0 rounded-xl border border-black/5 shadow-inner" :style="{ backgroundColor: `var(${colorVar(token)})` }" />
+                  <span class="min-w-0 flex-1 text-xs font-semibold">{{ token }}</span>
+                  <span class="font-mono text-[10px] uppercase text-hb-neutral-600">{{ hexFor(token) }}</span>
                 </div>
               </div>
             </article>
@@ -203,13 +218,12 @@ const receiptItems = [
           </div>
 
           <div class="mt-10 overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-0">
-            <div v-for="preset in textPresets" :key="preset.name" class="type-row">
+            <div v-for="preset in textPresets" :key="preset" class="type-row">
               <div class="type-meta">
-                <span>{{ preset.name }}</span>
-                <span>{{ preset.family }} · {{ preset.style }}</span>
-                <span>{{ preset.size }} / {{ preset.leading }} / {{ preset.tracking }}</span>
+                <span>{{ preset }}</span>
+                <span v-for="(line, index) in metricLines(preset)" :key="index">{{ line }}</span>
               </div>
-              <p :class="preset.className">The quick brown fox jumps over the lazy dog.</p>
+              <p :ref="typeRef(preset)" :class="preset">The quick brown fox jumps over the lazy dog.</p>
             </div>
           </div>
         </section>
@@ -224,13 +238,17 @@ const receiptItems = [
           </div>
 
           <div class="mt-10 grid gap-px overflow-hidden rounded-2xl border border-hb-neutral-400 bg-hb-neutral-400 sm:grid-cols-2 xl:grid-cols-4">
-            <article v-for="space in spacingTokens" :key="space.name" class="bg-hb-neutral-0 p-5">
+            <article v-for="step in spacingSteps" :key="step" class="bg-hb-neutral-0 p-5">
               <div class="flex h-20 items-end">
-                <div class="rounded-sm bg-hb-terracotta-500" :style="{ width: space.width, height: space.width }" />
+                <div
+                  :ref="widthRef(String(step))"
+                  class="rounded-sm bg-hb-terracotta-500"
+                  :style="{ width: `calc(var(--spacing) * ${step})`, height: `calc(var(--spacing) * ${step})` }"
+                />
               </div>
               <div class="mt-4 flex items-center justify-between border-t border-hb-neutral-200 pt-3">
-                <code class="text-xs font-semibold">space-{{ space.name }}</code>
-                <span class="text-xs text-hb-neutral-600">{{ space.value }}</span>
+                <code class="text-xs font-semibold">space-{{ step }}</code>
+                <span class="text-xs text-hb-neutral-600">{{ widths[String(step)] ?? '—' }}</span>
               </div>
             </article>
           </div>
